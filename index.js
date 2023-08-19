@@ -122,6 +122,10 @@ class S3Adapter {
       params.ServerSideEncryption = this._encryption;
     }
     if (options.metadata && typeof options.metadata === 'object') {
+      if (options.metadata.contentEncoding) {
+        params.ContentEncoding = options.metadata.contentEncoding;
+        delete options.metadata.contentEncoding;
+      }
       params.Metadata = options.metadata;
     }
     if (options.tags && typeof options.tags === 'object') {
